@@ -12,6 +12,7 @@ import FindStudents from "../components/FindStudents";
 import KnowTeamMembers from "../components/KnowTeamMembers";
 import Statistics from "../components/Statistics";
 import Calendar from "../components/Calendar";
+import Kanban from "../components/Kanban";
 
 const router = createBrowserRouter([
   {
@@ -109,6 +110,17 @@ const router = createBrowserRouter([
         <Navbar />
         <Sidebar />
         <Calendar />
+        <Footer />
+      </>
+    ),
+  },
+  {
+    path: "/kanban",
+    element: (
+      <>
+        <Navbar />
+        <Sidebar />
+        <Kanban />
         <Footer />
       </>
     ),
