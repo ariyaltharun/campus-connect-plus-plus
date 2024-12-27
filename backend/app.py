@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes import users_router
+from routes import users_router, statistics_router, search_router
+
 
 # Create FastAPI instance
 app = FastAPI()
@@ -16,3 +17,5 @@ app.add_middleware(
 
 # Add routes
 app.include_router(users_router, prefix="/users")
+app.include_router(search_router, prefix="/search")
+app.include_router(statistics_router, prefix="/statistics")
