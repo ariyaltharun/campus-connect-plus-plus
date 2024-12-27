@@ -1,25 +1,26 @@
-import './App.css'
+import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "../components/Home"
+import Home from "../components/Home";
 import Navbar from "../components/Navbar";
-import StudentSignUp from "../components/StudentSignUp"
-import FacultySignUp from "../components/FacultySignUp"
-import Footer from "../components/Footer"
-import FindPeople from '../components/FindPeople';
-import Sidebar from '../components/Sidebar';
-import FindProjects from '../components/FindProjects';
-import FindStudents from '../components/FindStudents';
-import KnowTeamMembers from '../components/KnowTeamMembers';
-import Statistics from '../components/Statistics';
+import StudentSignUp from "../components/StudentSignUp";
+import FacultySignUp from "../components/FacultySignUp";
+import Footer from "../components/Footer";
+import FindPeople from "../components/FindPeople";
+import Sidebar from "../components/Sidebar";
+import FindProjects from "../components/FindProjects";
+import FindStudents from "../components/FindStudents";
+import KnowTeamMembers from "../components/KnowTeamMembers";
+import Statistics from "../components/Statistics";
+import Calendar from "../components/Calendar";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <>
-      <Navbar/>
-      <Sidebar/>
-        <Home/>
+        <Navbar />
+        <Sidebar />
+        <Home />
         <Footer />
       </>
     ),
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
     element: (
       <>
         <Navbar />
-        <Sidebar/>
+        <Sidebar />
         <StudentSignUp />
         <Footer />
       </>
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
     element: (
       <>
         <Navbar />
-        <Sidebar/>
+        <Sidebar />
         <FacultySignUp />
         <Footer />
       </>
@@ -51,8 +52,8 @@ const router = createBrowserRouter([
     element: (
       <>
         <Navbar />
-        <Sidebar/>
-        <FindPeople/>
+        <Sidebar />
+        <FindPeople />
         <Footer />
       </>
     ),
@@ -62,8 +63,8 @@ const router = createBrowserRouter([
     element: (
       <>
         <Navbar />
-        <Sidebar/>
-        <FindProjects/>
+        <Sidebar />
+        <FindProjects />
         <Footer />
       </>
     ),
@@ -73,8 +74,8 @@ const router = createBrowserRouter([
     element: (
       <>
         <Navbar />
-        <Sidebar/>
-        <FindStudents/>
+        <Sidebar />
+        <FindStudents />
         <Footer />
       </>
     ),
@@ -84,8 +85,8 @@ const router = createBrowserRouter([
     element: (
       <>
         <Navbar />
-        <Sidebar/>
-        <KnowTeamMembers/>
+        <Sidebar />
+        <KnowTeamMembers />
         <Footer />
       </>
     ),
@@ -95,14 +96,23 @@ const router = createBrowserRouter([
     element: (
       <>
         <Navbar />
-        <Sidebar/>
-        <Statistics/>
+        <Sidebar />
+        <Statistics />
         <Footer />
       </>
     ),
   },
-
-  
+  {
+    path: "/calendar",
+    element: (
+      <>
+        <Navbar />
+        <Sidebar />
+        <Calendar />
+        <Footer />
+      </>
+    ),
+  },
 ]);
 
 export default function App() {

@@ -1,0 +1,4 @@
+Calendar
+Dashboard for each user
+Adding industry experts/companies for funding
+Kanban board for project management

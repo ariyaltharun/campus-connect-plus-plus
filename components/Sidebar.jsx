@@ -1,6 +1,7 @@
 import React from "react";
 import DarkMode from "./DarkMode";
 import { Link } from "react-router-dom";
+import { FaCalendarAlt } from "react-icons/fa";
 
 export default function Sidebar() {
   return (
@@ -151,6 +152,17 @@ export default function Sidebar() {
                 </svg>
                 <span className="flex-1 ms-3 whitespace-nowrap">
                   Know team members
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/calendar"
+                className="flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
+              >
+                <FaCalendarAlt className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true"/>
+                <span className="flex-1 ms-3 whitespace-nowrap">
+                  Calendar
                 </span>
               </Link>
             </li>
