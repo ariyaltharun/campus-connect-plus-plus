@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import Loading from "./Loading";
 
 export default function FindProjects() {
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
   const [formData, setFormData] = useState({
     status: "",
     area: "",
@@ -24,7 +26,7 @@ export default function FindProjects() {
 
   const applyAreaOfInterest = async () => {
     try {
-      const r = await axios.get("http://localhost:8080/all_areas");
+      const r = await axios.get(`${BACKEND_URL}/search/all_areas`);
       setAreaOfInt(r.data);
       //   console.log(r.data)
       //   console.log(areaOfInt)
@@ -42,9 +44,8 @@ export default function FindProjects() {
     event.preventDefault();
 
     try {
-      const r = await axios.post(
-        "http://localhost:8080/find_projects",
-        formData
+      const r = await axios.get(
+        `${BACKEND_URL}/search/find_projects?status=${formData.status}&area=${formData.area}`
       );
       // console.log(r.data);
       const data = r.data;
@@ -127,7 +128,7 @@ export default function FindProjects() {
                 {areaOfInt &&
                   areaOfInt.flat().map((item, idx) => {
                     return (
-                      <option key={item} value={item}>
+                      <option key={idx} value={item}>
                         {item}
                       </option>
                     );

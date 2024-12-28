@@ -3,6 +3,8 @@ import axios from "axios";
 import Loading from "./Loading";
 
 function KnowTeamMembers() {
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
   const [formData, setFormData] = useState({
     status: "",
   });
@@ -24,7 +26,7 @@ function KnowTeamMembers() {
     setIsLoading(true);
     event.preventDefault();
     try {
-      const r = await axios.post("http://localhost:8080/know-team", formData);
+      const r = await axios.get(`${BACKEND_URL}/search/know-team?status=${formData.status}`);
       //   r.then((response) => response.json())
       //   r.then((data) => setResponse(data));
 

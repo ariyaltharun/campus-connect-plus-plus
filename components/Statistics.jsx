@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function Statistics() {
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
   const [totalStudents, setTotalStudents] = useState(0);
   const [totalFaculty, setTotalFaculty] = useState(0);
   const [totalLabs, setTotalLabs] = useState(0);
@@ -20,7 +22,7 @@ export default function Statistics() {
 
   const applyStatCountTotalPpl = async () => {
     try {
-      const r = await axios.get("http://localhost:8080/stat_count_total_ppl");
+      const r = await axios.get(`${BACKEND_URL}/statistics/stat_count_total_ppl`);
       setTotalStudents(r.data[0][0]);
       setTotalFaculty(r.data[0][1]);
       console.log(r.data);
@@ -33,7 +35,7 @@ export default function Statistics() {
 
   const applyStatCountLabs = async () => {
     try {
-      const r = await axios.get("http://localhost:8080/stat_count_labs");
+      const r = await axios.get(`${BACKEND_URL}/statistics/stat_count_labs`);
       setTotalLabs(r.data[0][0]);
       console.log(r.data);
       console.log(totalLabs);
@@ -44,7 +46,7 @@ export default function Statistics() {
 
   const applyStatCountEngagedPpl = async () => {
     try {
-      const r = await axios.get("http://localhost:8080/stat_count_engaged_ppl");
+      const r = await axios.get(`${BACKEND_URL}/statistics/stat_count_engaged_ppl`);
       setEngagedStudents(r.data[0][0]);
       setEngagedFaculty(r.data[0][1]);
     } catch (error) {
@@ -54,7 +56,7 @@ export default function Statistics() {
 
   const applyStatCountProjects = async () => {
     try {
-      const r = await axios.get("http://localhost:8080/stat_count_projects");
+      const r = await axios.get(`${BACKEND_URL}/statistics/stat_count_projects`);
       setOngoingProjects(r.data[0][0]);
       setPlannedProjects(r.data[0][1]);
       setCompletedProjects(r.data[0][2]);

@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import Loading from "./Loading";
 
 export default function FindPeople() {
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+  
   const [formData, setFormData] = useState({
     people: "",
     area: "",
@@ -24,7 +26,7 @@ export default function FindPeople() {
 
   const applyAreaOfInterest = async () => {
     try{
-      const r = await axios.get('http://localhost:8080/all_areas')
+      const r = await axios.get(`${BACKEND_URL}/search/all_areas`)
       setAreaOfInt(r.data)
       // console.log(r.data)
       // console.log(areaOfInt)
@@ -42,7 +44,7 @@ export default function FindPeople() {
     event.preventDefault();
 
     try {
-      const r = await axios.post("http://localhost:8080/find_people", formData);
+      const r = await axios.get(`${BACKEND_URL}/search/find_people?people=${formData.people}&area=${formData.area}`);
       // console.log(r.data);
       const data = r.data
       
