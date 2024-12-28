@@ -13,6 +13,7 @@ import KnowTeamMembers from "../components/KnowTeamMembers";
 import Statistics from "../components/Statistics";
 import Calendar from "../components/Calendar";
 import Kanban from "../components/Kanban";
+import Dashboard from "../components/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -121,6 +122,17 @@ const router = createBrowserRouter([
         <Navbar />
         <Sidebar />
         <Kanban />
+        <Footer />
+      </>
+    ),
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <>
+        <Navbar />
+        <Sidebar />
+        <Dashboard />
         <Footer />
       </>
     ),
