@@ -35,52 +35,72 @@ async def create_student_user(user: StudentCreationModel):
     # MATCH (u:User {username: $username})
     # RETURN u
     # """
+    uid = user.email_id.split("@")[0]
     query = """
-    MATCH (s:STUDENT {student_name: $sname, usn: $usn, email_id: $email, department: $dept, area_of_interest: $aoi, semester: $sem, skills: $skills})
-    """  
-    result, meta = db.cypher_query(query, user.model_dump())
+    MATCH (s:STUDENT {uid: $uid})
+    RETURN s
+    """
+    result, meta = db.cypher_query(query, {"uid": uid})
     if result:
         raise HTTPException(status_code=400, detail="User already exists")
     # hash password and create user
-    # user.password = hash_password(user.password)
-    # query = """
-    # CREATE (u:User {username: $username, password: $password})
-    # """
+    user.password = hash_password(user.password)
+    user.uid = uid
+    query = """
+    CREATE (s:STUDENT {student_name: $student_name, usn: $usn, uid: $uid, email_id: $email_id, department: $department, area_of_interest: $aoi, semester: $sem, skills: $skills, password: $password})
+    """
     result, meta = db.cypher_query(query, user.model_dump())
-    return result
+    return JSONResponse(status_code=200, content={"message": "User Created Successfully"})
 
 
 @router.post("/faculty/register")
 async def create_faculty_user(user: FactultyCreationModel):
     # check if user already exists
-    # query = """
-    # MATCH (u:User {username: $username})
-    # RETURN u
-    # """
+    uid = user.email_id.split("@")[0]
     query = """
-    CREATE (f:FACULTY {name: $fname, email_id: $email, department: $dept, area_of_interest: $aoi, designation: $desigtn})
-    """  
-    result, meta = db.cypher_query(query, user.model_dump())
+    MATCH (s:FACULTY {uid: $uid})
+    RETURN s
+    """
+    print(uid)
+    result, meta = db.cypher_query(query, {"uid": uid})
+    print(result)
     if result:
-        raise HTTPException(status_code=400, detail="User already exists")
+        print("User already exists")
+        return HTTPException(status_code=400, detail="User already exists")
     # hash password and create user
-    # user.password = hash_password(user.password)
-    # query = """
-    # CREATE (u:User {username: $username, password: $password})
-    # """
+    user.password = hash_password(user.password)
+    user.uid = uid
+    query = """
+    CREATE (f:FACULTY {name: $name, email_id: $email_id, department: $department, area_of_interest: $aoi, designation: $designation, password: $password, uid: $uid})
+    """
     result, meta = db.cypher_query(query, user.model_dump())
-    return result
+    return JSONResponse(status_code=200, content={"message": "User Created Successfully"})
 
 
-@router.post("/login", response_model=TokenModel)
+@router.post("/student/login")
 def login(form_data: UserAuth):
-    user = fake_db.get(form_data.username, None)
-    if user is None or not verify_password(form_data.password, user.password):
+    query = "MATCH (s:STUDENT {uid: $uid}) RETURN s"
+    result, meta = db.cypher_query(query, {"uid": form_data.email_id.split("@")[0]})
+    if result == [] or not verify_password(form_data.password, result[0][0].get("password")):
         raise HTTPException(status_code=400, detail="Invalid Credentials")
     token_model = TokenModel(
-        access_token=create_access_token({"sub": form_data.username}),
+        access_token=create_access_token({"sub": form_data.email_id}),
         token_type="bearer"
     )
+    # return JSONResponse(status_code=200, content={"message": "Login Successful"})
+    return token_model 
+
+@router.post("/faculty/login")
+def login(form_data: UserAuth):
+    query = "MATCH (s:STUDENT {uid: $uid}) RETURN s"
+    result, meta = db.cypher_query(query, {"uid": form_data.email_id.split("@")[0]})
+    if result == [] or not verify_password(form_data.password, result[0][0].get("password")):
+        raise HTTPException(status_code=400, detail="Invalid Credentials")
+    token_model = TokenModel(
+        access_token=create_access_token({"sub": form_data.email_id}),
+        token_type="bearer"
+    )
+    # return JSONResponse(status_code=200, content={"message": "Login Successful"})
     return token_model 
 
 

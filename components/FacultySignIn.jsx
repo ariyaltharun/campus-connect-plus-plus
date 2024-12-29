@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 import axios from "axios";
 import Loading from "./Loading";
+import { useNavigate } from "react-router-dom";
 
 export default function StudentSignUp() {
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -29,19 +32,19 @@ export default function StudentSignUp() {
 
     try {
       const r = await axios.post(
-        "http://localhost:8080/create_student",
+        `${BACKEND_URL}/users/faculty/login`,
         formData
       );
-      // console.log(r.data);
       const data = r.data;
-
-      if (data.length == 0) {
+      if (r.status === 200) {
         setResponse("Successful");
+        localStorage.setItem("token", data.access_token);
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 2000);
       } else {
         setResponse("Unsuccessful");
       }
-
-      // console.log(response);
       setIsLoading(false);
     } catch (error) {
       setResponse(null);

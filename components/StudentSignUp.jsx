@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 import axios from "axios";
 import Loading from "./Loading";
+import { useNavigate } from "react-router-dom";
 
 export default function StudentSignUp() {
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+  const navigate = useNavigate();
+
   const [areaOfInt, setAreaOfInt] = useState([]);
   const [skls, setSkls] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -21,7 +25,7 @@ export default function StudentSignUp() {
 
   const applyAreaOfInterest = async () => {
     try {
-      const r = await axios.get("http://localhost:8080/all_areas");
+      const r = await axios.get(`${BACKEND_URL}/search/all_areas`);
       setAreaOfInt(r.data);
       //   console.log(r.data)
       //   console.log(areaOfInt)
@@ -36,7 +40,7 @@ export default function StudentSignUp() {
 
   const applySkls = async () => {
     try {
-      const r = await axios.get("http://localhost:8080/all_skills");
+      const r = await axios.get(`${BACKEND_URL}/search/all_skills`);
       setSkls(r.data);
       //console.log(r.data);
       //console.log(skls);
@@ -50,10 +54,11 @@ export default function StudentSignUp() {
     usn: "",
     email_id: "",
     department: "",
-    area_of_int1: "",
-    area_of_int2: "",
+    aoi: ["", ""],
     sem: 0,
     skills: [],
+    password: "",
+    cpassword: "",
   });
 
   const handleChange = (event) => {
@@ -85,29 +90,60 @@ export default function StudentSignUp() {
     // console.log(formData);
   };
 
+  const handleAOIChange = (e) => {
+    // Destructuring
+    if (e.target.name === "area_of_int1") {
+      setFormData({ ...formData, aoi: [e.target.value, formData.aoi[1]] });
+    }
+    if (e.target.name === "area_of_int2") {
+      setFormData({ ...formData, aoi: [formData.aoi[0], e.target.value] });
+    }
+  }
+
   const [response, setResponse] = useState([]);
   const handleSubmit = async (event) => {
     setIsLoading(true);
     event.preventDefault();
 
     try {
-      const r = await axios.post(
-        "http://localhost:8080/create_student",
-        formData
-      );
-      // console.log(r.data);
-      const data = r.data;
-
-      if (data.length == 0) {
-        setResponse("Successful");
-      } else {
-        setResponse("Unsuccessful");
+      if (formData.password !== formData.cpassword) {
+        setResponse("Passwords do not match");
+        setIsLoading(false);
+        return;
       }
-
-      // console.log(response);
-      setIsLoading(false);
+      if (formData.email_id.match(/.\.edu$/) === null) {
+        setResponse("Please enter a valid college email id");
+        setIsLoading(false);
+        return;
+      }
+      if (formData.aoi[0] === "" || formData.aoi[1] === "") {
+        setResponse("Please select both areas of interest");
+        setIsLoading(false);
+        return;
+      }
+      delete formData.cpassword;
+      console.log(formData)
+      const r = await axios.post(
+        `${BACKEND_URL}/users/student/register`,
+        formData
+      ).then((res) => {
+        if (res.data.status_code === 200) {
+          setResponse("Successful");
+          setTimeout(() => {
+            navigate("/student_signin");
+          }, 2000);
+        } else {
+          setResponse(res.data.detail);
+        }
+      }).catch((err) => {
+        setResponse(err.response.data.detail);
+        console.log(err);
+      }).finally(() => {
+        console.log("Finally");
+        setFormData({ ...formData, cpassword: formData.password });
+        setIsLoading(false);
+      });
     } catch (error) {
-      setResponse(null);
       console.error("Error submitting form:", error);
     }
   };
@@ -242,8 +278,8 @@ export default function StudentSignUp() {
                     name="area_of_int1"
                     placeholder="areas"
                     id="area-of-interest"
-                    value={formData.area_of_int1}
-                    onChange={handleChange}
+                    value={formData.aoi[0]}
+                    onChange={handleAOIChange}
                   >
                     <option value="">Select area of interest</option>
                     {areaOfInt &&
@@ -279,8 +315,8 @@ export default function StudentSignUp() {
                     name="area_of_int2"
                     placeholder="areas"
                     id="area-of-interest"
-                    value={formData.area_of_int2}
-                    onChange={handleChange}
+                    value={formData.aoi[1]}
+                    onChange={handleAOIChange}
                   >
                     <option value="">Select area of interest</option>
                     {areaOfInt &&
@@ -360,7 +396,7 @@ export default function StudentSignUp() {
                     {skls &&
                       skls.flat().map((item, idx) => {
                         return (
-                          <div className="flex items-center space-x-2">
+                          <div key={idx} className="flex items-center space-x-2">
                             <input
                               type="checkbox"
                               id={item}
@@ -416,7 +452,7 @@ export default function StudentSignUp() {
                     placeholder="Type your password again"
                     id="cpassword"
                     name="cpassword"
-                    value={formData.password}
+                    value={formData.cpassword}
                     onChange={handleChange}
                   ></input>
                 </div>

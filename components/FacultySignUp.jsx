@@ -2,15 +2,20 @@ import React, { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 import axios from "axios";
 import Loading from "./Loading";
+import { useNavigate } from "react-router-dom";
 
 export default function FacultySignUp() {
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     email_id: "",
     department: "",
-    area_of_int1: "",
-    area_of_int2: "",
+    aoi: ["", ""],
     designation: "",
+    password: "",
+    cpassword: "",
   });
   const [isLoading, setIsLoading] = useState(true);
 
@@ -24,7 +29,20 @@ export default function FacultySignUp() {
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
-
+  const handleAOIChange = (event) => {
+    if (event.target.name === "area_of_int1") {
+      setFormData({
+        ...formData,
+        aoi: [event.target.value, formData.aoi[1]],
+      });
+    }
+    if (event.target.name === "area_of_int2") {
+      setFormData({
+        ...formData,
+        aoi: [formData.aoi[0], event.target.value],
+      });
+    }
+  };
   const [areaOfInt, setAreaOfInt] = useState([]);
 
   useEffect(() => {
@@ -33,10 +51,8 @@ export default function FacultySignUp() {
 
   const applyAreaOfInterest = async () => {
     try {
-      const r = await axios.get("http://localhost:8080/all_areas");
+      const r = await axios.get(`${BACKEND_URL}/search/all_areas`);
       setAreaOfInt(r.data);
-      //   console.log(r.data)
-      //   console.log(areaOfInt)
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -48,24 +64,40 @@ export default function FacultySignUp() {
     event.preventDefault();
 
     try {
-      const r = await axios.post(
-        "http://localhost:8080/create_faculty",
-        formData
-      );
-      // console.log(r.data);
-      const data = r.data;
-
-      if (data.length == 0) {
-        setResponse("Successful");
-      } else {
-        setResponse("Unsuccessful");
+      if (formData.password !== formData.cpassword) {
+        setResponse("Passwords do not match");
+        setIsLoading(false);
+        return;
+      } else if (formData.aoi[0] === "" || formData.aoi[1] === "") {
+        setResponse("Please select both areas of interest");
+        setIsLoading(false);
+        return;
+      } else if (formData.email_id.match(/.\.edu$/) === null) {
+        setResponse("Please use a valid .edu email address");
+        setIsLoading(false);
+        return;
       }
-
-      // Display the transposed array
-      // console.log(response);
-      setIsLoading(false);
+      delete formData.cpassword;
+      const r = await axios.post(
+        `${BACKEND_URL}/users/faculty/register`,
+        formData
+      ).then((res) => {
+        if (res.data.status_code === 200) {
+          setResponse("Successful");
+          setTimeout(() => {
+            navigate("/faculty_signin");
+          }, 2000);
+        } else {
+          setResponse(res.data.detail);
+        }
+      }).catch((err) => {
+        setResponse(err.response.data.detail);
+        console.log(err);
+      }).finally(() => {
+        setIsLoading(false);
+        setFormData({ ...formData, cpassword: formData.password });
+      });
     } catch (error) {
-      setResponse(null);
       console.error("Error submitting form:", error);
     }
   };
@@ -172,8 +204,8 @@ export default function FacultySignUp() {
                     name="area_of_int1"
                     placeholder="areas"
                     id="area-of-interest"
-                    value={formData.area_of_int1}
-                    onChange={handleChange}
+                    value={formData.aoi[0]}
+                    onChange={handleAOIChange}
                   >
                     <option value="">Select area of interest</option>
                     {areaOfInt &&
@@ -209,8 +241,8 @@ export default function FacultySignUp() {
                     name="area_of_int2"
                     placeholder="areas"
                     id="area-of-interest"
-                    value={formData.area_of_int2}
-                    onChange={handleChange}
+                    value={formData.aoi[1]}
+                    onChange={handleAOIChange}
                   >
                     <option value="">Select area of interest</option>
                     {areaOfInt &&
@@ -293,7 +325,7 @@ export default function FacultySignUp() {
                     placeholder="Type your password again"
                     id="cpassword"
                     name="cpassword"
-                    value={formData.password}
+                    value={formData.cpassword}
                     onChange={handleChange}
                   ></input>
                 </div>

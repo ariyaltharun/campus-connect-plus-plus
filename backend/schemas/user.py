@@ -5,19 +5,23 @@ from typing import List
 
 class StudentCreationModel(BaseModel):
     """ Student Creation Model """
-    sname: str
+    student_name: str
+    uid: str = None
     usn: str
-    email: EmailStr
-    dept: str
+    email_id: EmailStr
+    department: str
     aoi: List[str]
     sem: int
     skills: List[str]
-
+    password: str
+    
 
 class FactultyCreationModel(BaseModel):
     """ Faculty Creation Model """
-    fname: str
-    email: EmailStr
-    dept: str
+    name: str
+    uid: str = None
+    email_id: EmailStr
+    department: str
     aoi: List[str]
-    desigtn: str
+    designation: str
+    password: str

@@ -2,10 +2,14 @@ import React, { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 import axios from "axios";
 import Loading from "./Loading";
+import { useNavigate } from "react-router-dom";
 
 export default function StudentSignUp() {
-  const [isLoading, setIsLoading] = useState(true);
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+  const navigate = useNavigate();
 
+  const [isLoading, setIsLoading] = useState(true);
+  
   useEffect(() => {
     // Simulate loading for 2 seconds
     setTimeout(() => {
@@ -22,51 +26,30 @@ export default function StudentSignUp() {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
-//   const handleSklsChange = (e) => {
-//     console.log(e);
-//     // Destructuring
-//     const { value, checked } = e.target;
-//     let { skils } = "";
-
-//     console.log(`${value} is ${checked}`);
-
-//     // Case 1 : The user checks the box
-//     if (checked) {
-//       skils = value;
-//       formData.skills.push(skils);
-//     }
-
-//     // Case 2  : The user unchecks the box
-//     else {
-//       skils = value;
-//       const index = formData.skills.indexOf(skils);
-//       if (index !== -1) {
-//         formData.skills.splice(index, 1);
-//       }
-//     }
-//     // console.log(formData);
-//   };
-
   const [response, setResponse] = useState([]);
   const handleSubmit = async (event) => {
     setIsLoading(true);
     event.preventDefault();
 
     try {
-      const r = await axios.post(
-        "http://localhost:8080/create_student",
-        formData
-      );
-      // console.log(r.data);
-      const data = r.data;
-
-      if (data.length == 0) {
+      console.log(formData);
+      const res = await fetch(`${BACKEND_URL}/users/student/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (res.status === 200)  {
         setResponse("Successful");
+        localStorage.setItem("token", data.access_token);
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 2000);
       } else {
         setResponse("Unsuccessful");
       }
-
-      // console.log(response);
       setIsLoading(false);
     } catch (error) {
       setResponse(null);
@@ -135,7 +118,7 @@ export default function StudentSignUp() {
                   type="submit"
                   className="inline-flex w-full items-center justify-center  bg-black px-3.5 py-2.5 font-semibold leading-7   rounded  border border-gray-800 dark:border-green-200 bg-transparent hover:bg-green-400 text-sm  text-slate-800 dark:text-white shadow  active:bg-green-700"
                 >
-                  Create Account <ArrowRight className="ml-2" size={16} />
+                  Sigin In <ArrowRight className="ml-2" size={16} />
                 </button>
               </div>
             </div>
