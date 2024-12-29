@@ -15,7 +15,7 @@ function DarkMode() {
 
     return (
         <div className="flex items-center justify-center ">
-            <button className=" w-full m-3 p-3 border border-white bg-slate-400 dark:bg-gray-900" onClick={()=> darkModeHandler()}>
+            <button className="flex items-center justify-center w-full m-3 p-3 border border-white bg-slate-400 dark:bg-gray-900" onClick={()=> darkModeHandler()}>
                 {
                     dark && <IoMoon />
                 }

@@ -87,7 +87,7 @@ export default function FindStudents() {
   return (
     <>
       {/* input form */}
-      <div className="mx-auto max-w-screen-2xl px-4 py-32 dark:bg-slate-700 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-screen-2xl px-4 py-32 dark:bg-slate-900 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-lg text-center">
           <h1 className="text-2xl dark:text-white font-bold sm:text-3xl">
             Find students with right skills 🎖

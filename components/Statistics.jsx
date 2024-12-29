@@ -64,7 +64,7 @@ export default function Statistics() {
   };
 
   return (
-    <div className="py-20 px-5 dark:bg-slate-700">
+    <div className="py-20 px-5 dark:bg-slate-900">
       <div className=" m-8 text-center text-3xl font-bold dark:text-white">
         Statistics
       </div>

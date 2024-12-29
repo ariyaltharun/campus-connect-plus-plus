@@ -23,22 +23,22 @@ const FAQs = () => {
     };
 
     return (
-        <div className="max-w-4xl mx-auto p-8">
-            <h2 className="mb-8 text-3xl font-bold sm:text-4xl text-center">Frequently Asked Questions</h2>
-            <div className="space-y-4">
+        <div className="max-w-full mx-auto p-8 bg-white dark:bg-gray-900 ">
+            <h2 className="mb-8 text-3xl font-bold sm:text-4xl text-center text-black dark:text-white">Frequently Asked Questions</h2>
+            <div className="space-y-4 max-w-4xl mx-auto">
                 {faqs.map((faq, index) => (
-                    <div key={index} className="border-b">
+                    <div key={index} className="border-b border-gray-300 dark:border-gray-700">
                         <button
                             className="w-full text-left py-2 focus:outline-none"
                             onClick={() => toggleFAQ(index)}
                         >
                             <div className="flex justify-between items-center">
-                                <span className="text-lg font-medium">{faq.question}</span>
-                                <span>{activeIndex === index ? '-' : '+'}</span>
+                                <span className="text-lg font-medium text-black dark:text-white">{faq.question}</span>
+                                <span className="text-black dark:text-white">{activeIndex === index ? '-' : '+'}</span>
                             </div>
                         </button>
                         {activeIndex === index && (
-                            <div className="py-2 text-gray-700">
+                            <div className="py-2 text-gray-700 dark:text-gray-300">
                                 {faq.answer}
                             </div>
                         )}

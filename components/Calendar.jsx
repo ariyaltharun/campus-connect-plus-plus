@@ -103,8 +103,8 @@ const Calendar = () => {
           const cloneDay = day;
           days.push(
             <div
-              className={`col p-2 border border-gray-200 dark:border-gray-700 text-center cursor-pointer ${
-                !isSameDay(day, selectedDate) ? "bg-gray-100 dark:bg-gray-800" : "bg-green-200/75 dark:bg-green-600"
+              className={`col p-2 border border-gray-200 dark:border-gray-600 text-center cursor-pointer ${
+                !isSameDay(day, selectedDate) ? "bg-gray-100 dark:bg-gray-700" : "bg-green-200/75 dark:bg-green-600"
               }`}
               key={day}
               onClick={() => onDateClick(cloneDay)}
@@ -174,7 +174,7 @@ const Calendar = () => {
     };
   
     return (
-      <div className="calendar p-5 pt-24 bg-white dark:bg-slate-700 shadow-md ">
+      <div className="calendar p-5 pt-24 bg-white dark:bg-slate-900 shadow-md ">
         {renderHeader()}
         {renderDays()}
         {renderCells()}
