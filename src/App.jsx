@@ -3,7 +3,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "../components/Home";
 import Navbar from "../components/Navbar";
 import StudentSignUp from "../components/StudentSignUp";
+import StudentSignIn from "../components/StudentSignIn";
 import FacultySignUp from "../components/FacultySignUp";
+import FacultySignIn from "../components/FacultySignIn";
 import Footer from "../components/Footer";
 import FindPeople from "../components/FindPeople";
 import Sidebar from "../components/Sidebar";
@@ -133,6 +135,28 @@ const router = createBrowserRouter([
         <Navbar />
         <Sidebar />
         <Dashboard />
+        <Footer />
+      </>
+    ),
+  },
+  {
+    path: "/student_signin",
+    element: (
+      <>
+        <Navbar />
+        <Sidebar />
+        <StudentSignIn />
+        <Footer />
+      </>
+    ),
+  },
+  {
+    path: "/faculty_signin",
+    element: (
+      <>
+        <Navbar />
+        <Sidebar />
+        <FacultySignIn />
         <Footer />
       </>
     ),

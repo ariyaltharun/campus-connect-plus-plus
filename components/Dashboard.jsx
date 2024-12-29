@@ -7,7 +7,7 @@ const Dashboard = () => {
     // User Info
     // User Projects
     // Engaged Labs
-    // Streek map
+    // Streak map
     // Recent Activity
     const userDetailsCard = () => {
         return (
@@ -35,15 +35,6 @@ const Dashboard = () => {
                         <li><a href="#" className="text-blue-600 dark:text-blue-300 hover:underline">Publication 1</a></li>
                         <li><a href="#" className="text-blue-600 dark:text-blue-300 hover:underline">Publication 2</a></li>
                         <li><a href="#" className="text-blue-600 dark:text-blue-300 hover:underline">Publication 3</a></li>
-                    </ul>
-                </div>
-                {/* Labs */}
-                <div>
-                    <h1 className="text-gray-900 dark:text-white text-xl font-semibold mb-2 border-t-2 dark:border-gray-500 pt-4">Labs</h1>
-                    <ul className="list-none space-y-2 pb-4">
-                        <li><a href="#" className="text-blue-600 dark:text-blue-300 hover:underline">Lab 1</a></li>
-                        <li><a href="#" className="text-blue-600 dark:text-blue-300 hover:underline">Lab 2</a></li>
-                        <li><a href="#" className="text-blue-600 dark:text-blue-300 hover:underline">Lab 3</a></li>
                     </ul>
                 </div>
             </div>
@@ -76,13 +67,41 @@ const Dashboard = () => {
         )
     }
 
+    // section that returns list of labs
+    const LabsList = () => {
+        const labs = [
+            {
+                lab: "Lab 1",
+                description: "This is a lab"
+            },
+            {
+                lab: "Lab 2",
+                description: "This is a lab"
+            }
+        ]
+
+        return (
+            <ul className="list-none space-y-2">
+                {labs.map((lab, key) => (
+                    <li key={key} className="bg-gray-100 dark:bg-gray-800 rounded-lg shadow-lg">
+                        <div className="p-3">
+                            <h1 className="text-lg md:text-xl text-gray-900 dark:text-white font-semibold">{lab.lab}</h1>
+                            <p className="md:text-lg text-gray-900 dark:text-gray-300">{lab.description}</p>
+                        </div>
+                    </li>
+                ))}
+            </ul>
+        )
+    }
+
     const userMetrics = () => {
         return (
             <div className="p-12 rounded-lg shadow-lg bg-gray-100 dark:bg-gray-800">
-                <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    <div className="bg-slate-200 dark:bg-gray-700 p-4 rounded shadow-lg text-center">
-                        <p className="text-gray-900 dark:text-white text-3xl md:text-5xl">Yet to Decide</p>
-                        <h1 className="dark:text-gray-100 text-lg md:text-xl p-2 font-bold">Blah Blah Blah</h1>
+                <div className="grid md:grid-cols-2 gap-4">
+                    <div className="bg-slate-200 dark:bg-gray-700 p-4 rounded shadow-lg ">
+                        {/* Labs */}
+                        <h1 className="dark:text-gray-100 text-lg md:text-2xl p-2 font-bold">Labs</h1>
+                        <LabsList />
                     </div>
                     <div className="bg-slate-200 dark:bg-gray-700 p-4 rounded shadow-lg">
                         {/* Todays task */}
@@ -118,9 +137,9 @@ const Dashboard = () => {
                         <h1 className="dark:text-gray-100 text-lg md:text-2xl p-2 font-bold">Projects</h1>
                         <TodaysTaskList />
                     </div>
-                    {/* Remainders */}
+                    {/* Reminders */}
                     <div className="bg-slate-200 dark:bg-gray-700 p-4 rounded shadow-lg">
-                        <h1 className="dark:text-gray-100 text-lg md:text-2xl p-2 font-bold">Remainders</h1>
+                        <h1 className="dark:text-gray-100 text-lg md:text-2xl p-2 font-bold">Reminders</h1>
                         <TodaysTaskList />
                     </div>
                     {/* Recent Activities */}
@@ -156,7 +175,7 @@ const Dashboard = () => {
         return (
             <div className="p-12 rounded-lg shadow-lg bg-gray-100 dark:bg-gray-800">
                 {/* <h1 className="text-xl p-4 text-gray-900 dark:text-white font-semibold">Analytics</h1> */}
-                <div className="grid md:grid-cols-3 gap-4">
+                <div className="grid md:grid-cols-2 gap-4">
                     {analyticsData.map((data, key) => (
                         <div key={key} className="bg-slate-200 dark:bg-gray-700 p-4 rounded shadow-lg text-center">
                             <p className="text-gray-900 dark:text-white text-3xl md:text-5xl">{data.value}</p>
@@ -196,7 +215,7 @@ const Dashboard = () => {
     }
 
 
-    const streekMapCard = () => {
+    const streakMapCard = () => {
         return (
             <div className="bg-gray-100 dark:bg-gray-800 rounded-lg shadow-lg">
                 <h1 className="text-xl p-4 text-gray-900 dark:text-white font-semibold px-12 pt-8">Activity Streak</h1>
@@ -253,7 +272,7 @@ const Dashboard = () => {
                 {userMetrics()}
                 {userAnaltyicsCard()}
                 {/* {userProjectsCard()} */}
-                {streekMapCard()}
+                {streakMapCard()}
                 {/* {recentActivityCard()} */}
             </div>
         </div>
