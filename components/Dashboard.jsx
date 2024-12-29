@@ -1,7 +1,7 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
-
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
     // User Info
@@ -205,7 +205,7 @@ const Dashboard = () => {
                 <div className="grid md:grid-cols-2 gap-4 px-12 pb-12">
                     {project.map((project, key) => (
                         <div key={key} className="bg-slate-200 dark:bg-gray-700 p-4 rounded shadow-lg">
-                            <h1 className="dark:text-gray-100 text-lg font-bold">{project.project}</h1>
+                            <Link to="/project" className="dark:text-gray-100 text-lg font-bold">{project.project}</Link>
                             <p className="text-gray-900 dark:text-gray-300">{project.description}</p>
                         </div>
                     ))}

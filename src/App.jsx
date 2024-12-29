@@ -16,6 +16,7 @@ import Statistics from "../components/Statistics";
 import Calendar from "../components/Calendar";
 import Kanban from "../components/Kanban";
 import Dashboard from "../components/Dashboard";
+import ProjectDashboard from "../components/ProjectDashboard";
 
 const router = createBrowserRouter([
   {
@@ -157,6 +158,17 @@ const router = createBrowserRouter([
         <Navbar />
         <Sidebar />
         <FacultySignIn />
+        <Footer />
+      </>
+    ),
+  },
+  {
+    path: "/project",
+    element: (
+      <>
+        <Navbar />
+        <Sidebar />
+        <ProjectDashboard />
         <Footer />
       </>
     ),
