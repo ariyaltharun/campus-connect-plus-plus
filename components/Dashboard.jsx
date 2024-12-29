@@ -1,4 +1,6 @@
-import { startOfYear, endOfYear, eachDayOfInterval, format, getDay, getMonth } from 'date-fns';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import CalendarHeatmap from 'react-calendar-heatmap';
+import 'react-calendar-heatmap/dist/styles.css';
 
 
 const Dashboard = () => {
@@ -43,6 +45,89 @@ const Dashboard = () => {
                         <li><a href="#" className="text-blue-600 dark:text-blue-300 hover:underline">Lab 2</a></li>
                         <li><a href="#" className="text-blue-600 dark:text-blue-300 hover:underline">Lab 3</a></li>
                     </ul>
+                </div>
+            </div>
+        );
+    }
+
+    const TodaysTaskList = () => {
+        const tasks = [
+            {
+                task: "Task 1",
+                description: "This is a task"
+            },
+            {
+                task: "Task 2",
+                description: "This is a task"
+            }
+        ]
+
+        return (
+            <ul className="list-none space-y-2">
+                {tasks.map((task, key) => (
+                    <li key={key} className="bg-gray-100 dark:bg-gray-800 rounded-lg shadow-lg">
+                        <div className="p-3">
+                            <h1 className="text-lg md:text-xl text-gray-900 dark:text-white font-semibold">{task.task}</h1>
+                            <p className="md:text-lg text-gray-900 dark:text-gray-300">{task.description}</p>
+                        </div>
+                    </li>
+                ))}
+            </ul>
+        )
+    }
+
+    const userMetrics = () => {
+        return (
+            <div className="p-12 rounded-lg shadow-lg bg-gray-100 dark:bg-gray-800">
+                <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div className="bg-slate-200 dark:bg-gray-700 p-4 rounded shadow-lg text-center">
+                        <p className="text-gray-900 dark:text-white text-3xl md:text-5xl">Yet to Decide</p>
+                        <h1 className="dark:text-gray-100 text-lg md:text-xl p-2 font-bold">Blah Blah Blah</h1>
+                    </div>
+                    <div className="bg-slate-200 dark:bg-gray-700 p-4 rounded shadow-lg">
+                        {/* Todays task */}
+                        <h1 className="dark:text-gray-100 text-lg md:text-2xl p-2 font-bold">Todays' Tasks</h1>
+                        <TodaysTaskList />
+                    </div>
+                    <div className="bg-slate-200 dark:bg-gray-700 p-4 rounded shadow-lg">
+                        {/* Activity */}
+                        <h1 className="dark:text-gray-100 text-lg md:text-2xl p-2 font-bold">Activity</h1>
+                        <ResponsiveContainer width="100%" height={200}>
+                            <BarChart
+                                width={350}
+                                height={200}
+                                data={[
+                                    { day: 'Mon', hours: 4 },
+                                    { day: 'Tue', hours: 6 },
+                                    { day: 'Wed', hours: 8 },
+                                    { day: 'Thu', hours: 5 },
+                                    { day: 'Fri', hours: 7 }
+                                ]}
+                            >
+                                {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                                <XAxis dataKey="day" tickLine={false} />
+                                <YAxis tickLine={false} hide={true} />
+                                <Tooltip />
+                                <Legend />
+                                <Bar dataKey="hours" fill="#196f3d" stackId="hours" />
+                            </BarChart>
+                        </ResponsiveContainer>
+                    </div>
+                    {/* Projects */}
+                    <div className="bg-slate-200 dark:bg-gray-700 p-4 rounded shadow-lg">
+                        <h1 className="dark:text-gray-100 text-lg md:text-2xl p-2 font-bold">Projects</h1>
+                        <TodaysTaskList />
+                    </div>
+                    {/* Remainders */}
+                    <div className="bg-slate-200 dark:bg-gray-700 p-4 rounded shadow-lg">
+                        <h1 className="dark:text-gray-100 text-lg md:text-2xl p-2 font-bold">Remainders</h1>
+                        <TodaysTaskList />
+                    </div>
+                    {/* Recent Activities */}
+                    <div className="bg-slate-200 dark:bg-gray-700 p-4 rounded shadow-lg">
+                        <h1 className="dark:text-gray-100 text-lg md:text-2xl p-2 font-bold">Recent Activities</h1>
+                        <TodaysTaskList />
+                    </div>
                 </div>
             </div>
         );
@@ -112,56 +197,24 @@ const Dashboard = () => {
 
 
     const streekMapCard = () => {
-        const startDate = startOfYear(new Date());
-        const endDate = endOfYear(new Date());
-        const days = eachDayOfInterval({ start: startDate, end: endDate });
-
-        const months = [
-            'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-        ];
-
-        const monthDays = months.map((_, monthIndex) => {
-            return days.filter(day => getMonth(day) === monthIndex);
-        });
-
         return (
             <div className="bg-gray-100 dark:bg-gray-800 rounded-lg shadow-lg">
                 <h1 className="text-xl p-4 text-gray-900 dark:text-white font-semibold px-12 pt-8">Activity Streak</h1>
-                <div className="px-12 pb-12">
-                    <div className="flex space-x-4 mb-2">
-                        {months.map((month, monthIndex) => (
-                            <div key={monthIndex} className="flex flex-col items-center">
-                                <div className="text-gray-900 dark:text-white text-sm px-2 mb-1">{month}</div>
-                                <svg width="auto" height="110">
-                                    {monthDays[monthIndex].map((day, dayIndex) => (
-                                        <g key={dayIndex} transform={`translate(${Math.floor(dayIndex / 7) * 15}, ${getDay(day) * 15})`}>
-                                            <rect
-                                                x={0}
-                                                y={0}
-                                                width={13}
-                                                height={13}
-                                                rx={2}
-                                                ry={2}
-                                                fill={
-                                                    day.activity === 0
-                                                        ? '#ebedf0'
-                                                        : day.activity === 1
-                                                            ? '#c6e48b'
-                                                            : day.activity === 2
-                                                                ? '#7bc96f'
-                                                                : day.activity === 3
-                                                                    ? '#239a3b'
-                                                                    : '#196127'
-                                                }
-                                                title={`Activity on ${format(day, 'yyyy-MM-dd')}`}
-                                            />
-                                        </g>
-                                    ))}
-                                </svg>
-                            </div>
-                        ))}
-                    </div>
+                <div className="px-12 pb-12 text-center">
+                    <CalendarHeatmap
+                        startDate={new Date('2024-01-01')}
+                        endDate={new Date('2024-12-31')}
+                        values={[
+                            { date: '2024-01-01', count: 12 },
+                            { date: '2024-01-22', count: 122 },
+                            { date: '2024-01-30', count: 38 },
+                            // ...and so on
+                        ]}
+                        // tooltip doesn't work
+                        tooltipDataAttrs={(value) => { 
+                            return { 'data-tooltip': 'Tooltip: ' + value.count }
+                        }}
+                    />
                 </div>
             </div>
         );
@@ -197,10 +250,11 @@ const Dashboard = () => {
                 {userDetailsCard()}
             </div>
             <div className="space-y-4">
+                {userMetrics()}
                 {userAnaltyicsCard()}
-                {userProjectsCard()}
-                {/* {streekMapCard()} */}
-                {recentActivityCard()}
+                {/* {userProjectsCard()} */}
+                {streekMapCard()}
+                {/* {recentActivityCard()} */}
             </div>
         </div>
     );
