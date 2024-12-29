@@ -1,4 +1,5 @@
 import React from "react";
+import FAQs from "./FAQs";
 
 export default function Home() {
   return (
@@ -244,6 +245,8 @@ export default function Home() {
         </div>
         </div>
       </section>
+      {/* FAQs section */}
+      <FAQs />
     </>
   );
 }
