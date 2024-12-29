@@ -1,4 +1,4 @@
 Calendar - Done - Changes can be made
-Kanban board for project management
+Kanban board for project management - Done
 Dashboard for each user
 Adding industry experts/companies for funding

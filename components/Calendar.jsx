@@ -40,7 +40,7 @@ const Calendar = () => {
           <h1 className="text-2xl dark:text-white font-bold sm:text-3xl text-center mb-5">
             Calendar of Events
           </h1>
-          <div className="header border border-gray-200 dark:border-gray-700 flex justify-between items-center mb-4">
+          <div className="header border border-gray-200 dark:border-gray-500 flex justify-between items-center mb-4">
             <div className="icon cursor-pointer" onClick={prevMonth}>
               <span className="material-icons">
                 <PiArrowSquareLeftFill className=" w-10 h-10 dark:text-white" />
@@ -78,7 +78,7 @@ const Calendar = () => {
         );
       }
   
-      return <div className="days grid grid-cols-7 border border-gray-200 dark:border-gray-700 p-2">{days}</div>;
+      return <div className="days grid grid-cols-7 border border-gray-200 dark:border-gray-500 p-2">{days}</div>;
     };
 
     /**
@@ -104,7 +104,7 @@ const Calendar = () => {
           days.push(
             <div
               className={`col p-2 border border-gray-200 dark:border-gray-700 text-center cursor-pointer ${
-                !isSameDay(day, selectedDate) ? "bg-gray-100 dark:bg-gray-800" : "bg-blue-200 dark:bg-blue-600"
+                !isSameDay(day, selectedDate) ? "bg-gray-100 dark:bg-gray-800" : "bg-green-200/75 dark:bg-green-600"
               }`}
               key={day}
               onClick={() => onDateClick(cloneDay)}
@@ -149,7 +149,7 @@ const Calendar = () => {
       return events
         .filter((event) => isSameDay(event.date, day))
         .map((event, index) => (
-          <div key={index} className="event bg-blue-200 dark:bg-blue-600 p-1 rounded mt-1">
+          <div key={index} className="event bg-green-300 dark:bg-green-400 p-1 rounded mt-1">
             {event.title}
           </div>
         ));
@@ -174,7 +174,7 @@ const Calendar = () => {
     };
   
     return (
-      <div className="calendar p-5 pt-24 bg-white dark:bg-gray-900 shadow-md rounded-lg">
+      <div className="calendar p-5 pt-24 bg-white dark:bg-slate-700 shadow-md ">
         {renderHeader()}
         {renderDays()}
         {renderCells()}

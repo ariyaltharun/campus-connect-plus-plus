@@ -4,14 +4,15 @@ export default function Home() {
   return (
     <>
       {/* welcome section */}
-      <section className="flex bg-slate-500 dark:bg-gray-900 text-white">
-        <div className="mx-auto max-w-screen-xl text-center px-4 py-32 pt-48 items-start lg:flex lg:h-screen lg:items-center ">
-          <div className=" max-w-5xl justify-center items-center">
-            <h1 className="bg-gradient-to-r from-green-400 via-yellow-200  to-red-300 bg-clip-text text-5xl font-extrabold text-transparent sm:text-5xl">
+      {/* style={{ backgroundImage: "url('/brush-stroke.png')", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat", width: "100 vw", alignItems: "center", justifyContent: "center" }} */}
+      <section className="flex dark:bg-gray-900 text-black dark:text-white" >
+        <div className="mx-auto max-w-screen-xl text-center px-16 py-32 pt-48 lg:flex lg:h-screen lg:items-center " >
+          <div className=" max-w-5xl justify-center items-center" >
+            <h1 className="bg-gradient-to-r from-green-400 via-yellow-400  to-red-300 py-2 bg-clip-text text-5xl font-extrabold text-transparent sm:text-5xl">
               Campus Connect.
             </h1>
 
-            <p className="mx-auto mt-4 max-w-3xl sm:text-xl/relaxed">
+            <p className="mx-auto max-w-3xl sm:text-xl/relaxed">
               We empower collaboration in academia.
             </p>
 
@@ -29,7 +30,7 @@ export default function Home() {
       {/* features section */}
       <section
         id="special"
-        className="bg-slate-500 dark:bg-gray-900 text-white px-20 "
+        className=" dark:bg-gray-900 text-gray-900 dark:text-white px-20 "
       >
         <div className="items-start lg:flex lg:justify-center">
         <div className="max-w-screen-xl flex flex-col items-center px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-20">
@@ -38,7 +39,7 @@ export default function Home() {
               What makes us special
             </h2>
 
-            <p className="mt-4 text-gray-300">
+            <p className="mt-4 text-gray-600 dark:text-gray-300">
               Our objective is to create a comprehensive database and web
               application for managing student and faculty projects, interests,
               and skills in an academic environment.
@@ -47,7 +48,7 @@ export default function Home() {
 
           <div className="mt-8 grid grid-cols-1 gap-8 md:mt-16 md:grid-cols-2 md:gap-12 lg:grid-cols-3">
             <div className="flex items-start gap-4">
-              <span className="shrink-0 rounded-lg bg-gray-800 p-4">
+              <span className="shrink-0 rounded-lg bg-gray-100 dark:bg-gray-800 p-4">
                 <svg
                   className="h-5 w-5"
                   fill="none"
@@ -69,7 +70,7 @@ export default function Home() {
               <div>
                 <h2 className="text-lg font-bold">Student and Faculty Data</h2>
 
-                <p className="mt-1 text-sm text-gray-300">
+                <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
                   Maintain detailed data for students and faculty members.
                   Profiles include information such as name, email, department,
                   semester (for students), designation (for faculty), areas of
@@ -79,7 +80,7 @@ export default function Home() {
             </div>
 
             <div className="flex items-start gap-4">
-              <span className="shrink-0 rounded-lg bg-gray-800 p-4">
+              <span className="shrink-0 rounded-lg bg-gray-100 dark:bg-gray-800 p-4">
                 <svg
                   className="h-5 w-5"
                   fill="none"
@@ -101,7 +102,7 @@ export default function Home() {
               <div>
                 <h2 className="text-lg font-bold">Project Management</h2>
 
-                <p className="mt-1 text-sm text-gray-300">
+                <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
                   Create and manage project records, including title,
                   description, status (ongoing, planned, completed), and
                   associated students and faculty. Track which students and
@@ -111,7 +112,7 @@ export default function Home() {
             </div>
 
             <div className="flex items-start gap-4">
-              <span className="shrink-0 rounded-lg bg-gray-800 p-4">
+              <span className="shrink-0 rounded-lg bg-gray-100 dark:bg-gray-800 p-4">
                 <svg
                   className="h-5 w-5"
                   fill="none"
@@ -135,7 +136,7 @@ export default function Home() {
                   Interests and Skills Matching
                 </h2>
 
-                <p className="mt-1 text-sm text-gray-300">
+                <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
                   Extract and display unique areas of interest and skills from
                   student and faculty profiles. Find common and unique interests
                   and skills among students and faculty.
@@ -144,7 +145,7 @@ export default function Home() {
             </div>
 
             <div className="flex items-start gap-4">
-              <span className="shrink-0 rounded-lg bg-gray-800 p-4">
+              <span className="shrink-0 rounded-lg bg-gray-100 dark:bg-gray-800 p-4">
                 <svg
                   className="h-5 w-5"
                   fill="none"
@@ -166,7 +167,7 @@ export default function Home() {
               <div>
                 <h2 className="text-lg font-bold">Dynamic Querying</h2>
 
-                <p className="mt-1 text-sm text-gray-300">
+                <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
                   Perform dynamic queries to find students or faculty with
                   specific interests or skills. Retrieve detailed information
                   about projects and the people associated with them.
@@ -175,7 +176,7 @@ export default function Home() {
             </div>
 
             <div className="flex items-start gap-4">
-              <span className="shrink-0 rounded-lg bg-gray-800 p-4">
+              <span className="shrink-0 rounded-lg bg-gray-100 dark:bg-gray-800 p-4">
                 <svg
                   className="h-5 w-5"
                   fill="none"
@@ -197,7 +198,7 @@ export default function Home() {
               <div>
                 <h2 className="text-lg font-bold">Statistics and Insights</h2>
 
-                <p className="mt-1 text-sm text-gray-300">
+                <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
                   Display statistical information, such as total number of
                   students and faculty, number of students and faculty engaged
                   in projects, total number of projects and their statuses,
@@ -207,7 +208,7 @@ export default function Home() {
             </div>
 
             <div className="flex items-start gap-4">
-              <span className="shrink-0 rounded-lg bg-gray-800 p-4">
+              <span className="shrink-0 rounded-lg bg-gray-100 dark:bg-gray-800 p-4">
                 <svg
                   className="h-5 w-5"
                   fill="none"
@@ -231,7 +232,7 @@ export default function Home() {
                   Frontend and Backend Integration
                 </h2>
 
-                <p className="mt-1 text-sm text-gray-300">
+                <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
                   Backend developed with Flask to handle data processing and API
                   endpoints. Frontend developed with React for dynamic and
                   interactive user interface. Seamless communication between
