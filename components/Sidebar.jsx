@@ -3,6 +3,7 @@ import DarkMode from "./DarkMode";
 import { Link } from "react-router-dom";
 import { FaCalendarAlt } from "react-icons/fa";
 import { BsKanban } from "react-icons/bs";
+import { MdDashboard } from "react-icons/md";
 import { PiStudentFill } from "react-icons/pi";
 import { RiTeamLine } from "react-icons/ri";
 
@@ -161,6 +162,17 @@ export default function Sidebar() {
                 <BsKanban className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" />
                 <span className="flex-1 ms-3 whitespace-nowrap">
                   Kanban Board
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/dashboard"
+                className="flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
+              >
+                <MdDashboard className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" />
+                <span className="flex-1 ms-3 whitespace-nowrap">
+                  Dashboard
                 </span>
               </Link>
             </li>
