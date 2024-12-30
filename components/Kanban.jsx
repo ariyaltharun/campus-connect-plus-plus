@@ -1,39 +1,97 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import { BsFillRocketTakeoffFill } from "react-icons/bs";
 
 const Kanban = () => {
+    // Variables
+    const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
+    // States
     const [tasks, setTasks] = useState({
-        todo: [],
-        inProgress: [],
-        done: []
+        todo: [{
+            "item": "",
+        }],
+        inProgress: [{
+            "item": ""
+        }],
+        done: [{
+            "item": ""
+        }]
     });
 
-    const addTask = (column, task) => {
+    // Make API calls
+    useEffect(() => {
+        async function fetchData() {
+            await axios.get(`${BACKEND_URL}/kanban/all`)
+                .then((res) => {
+                    const data = res.data;
+                    console.log(data)
+                    setTasks({ ...data });
+                })
+                .catch((err) => {
+                    console.error(err);
+                })
+                .finally(() => {
+                    console.log('API call finished');
+                })
+        }
+        fetchData()
+    }, []);
+
+    //add task function
+    const addTask = async (column, task) => {
         if (!task) return;
         setTasks({
             ...tasks,
-            [column]: [...tasks[column], task]
+            [column]: [...tasks[column], {'item': task}]
         });
+        await axios.get(`${BACKEND_URL}/kanban/${column}/add?item=${task}`)
+            .then((res) => {
+                console.log(res.data);
+            })
+            .catch((err) => {
+                console.error(err);
+            })
+            .finally(() => {
+                console.log('API call finished');
+            })
     };
 
     //remove task function
-    const removeTask = (column, index) => {
+    const removeTask = async (column, index) => {
+        const item = tasks[column][index];
+        console.log(item)
         const newTasks = tasks[column].filter((_, i) => i !== index);
         setTasks({
             ...tasks,
             [column]: newTasks
         });
+        await axios.get(`${BACKEND_URL}/kanban/${column}/remove?item=${item['item']}`)
+            .then((res) => {
+                console.log("Removed", res.data);
+            })
+            .catch((err) => {
+                console.error(err);
+            })
     };
 
     // function to move to the next column
-    const moveTask = (from, to, index) => {
+    const moveTask = async (from, to, index) => {
         const task = tasks[from][index];
+        console.log(from, to, task);
         const newTasks = tasks[from].filter((_, i) => i !== index);
         setTasks({
             ...tasks,
             [from]: newTasks,
             [to]: [...tasks[to], task]
         });
+        await axios.get(`${BACKEND_URL}/kanban/${from}/to/${to}/move?item=${task['item']}`)
+            .then((res) => {
+                console.log("Moved", res.data);
+            })
+            .catch((err) => {
+                console.error(err);
+            })
     };
 
     return (
@@ -46,7 +104,7 @@ const Kanban = () => {
                         <ul>
                             {tasks[column].map((task, index) => (
                                 <li key={index} className="p-2 rounded mb-2 dark:bg-gray-700 bg-gray-300 flex justify-between items-center">
-                                    {task}
+                                    {task["item"]}
                                     <div>
                                         {column !== 'done' && (
                                             <button
