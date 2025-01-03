@@ -4,3 +4,5 @@ uvicorn~=0.25.0
 neomodel==5.4.2
 pymongo==4.10.1 # Why PyMongo? PyMongo is the official MongoDB driver for synchronous Python applications.
 pydantic[email]
+passlib
+passlib[bcrypt]
