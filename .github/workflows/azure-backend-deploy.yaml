@@ -1,0 +1,34 @@
+name: Azure WebApp Service - Backend Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  install-packages-and-deploy:
+    name: Install Packages and Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull repo into github actions container
+        uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+
+      - name: Create and Start Virtual Enviroment
+        run: |
+          cd backend/
+          python -m venv antenv/
+          source ./antenv/bin/activate
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+      
+      - name: Deploy to Azure
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'campus-connect-plus-plus-backend'
+          publish-profile: ${{ secrets.AZURE_WEBAPP_BACKEND_PUBLISH_PROFILE }}
+          package: './backend'
