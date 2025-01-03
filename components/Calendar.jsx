@@ -174,7 +174,7 @@ const Calendar = () => {
     };
   
     return (
-      <div className="calendar p-5 pt-24 bg-white dark:bg-slate-900 shadow-md ">
+      <div className="calendar p-10 pt-24 bg-white dark:bg-slate-900 shadow-md ">
         {renderHeader()}
         {renderDays()}
         {renderCells()}
