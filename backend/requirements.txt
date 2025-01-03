@@ -1,6 +1,6 @@
-fastapi==0.115.6
+fastapi~=0.108.0
+gunicorn~=21.2.0
+uvicorn~=0.25.0
 neomodel==5.4.2
 pymongo==4.10.1 # Why PyMongo? PyMongo is the official MongoDB driver for synchronous Python applications.
-uvicorn
-gunicorn
 pydantic[email]
