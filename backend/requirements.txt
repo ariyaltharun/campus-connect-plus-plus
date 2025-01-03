@@ -6,3 +6,5 @@ pymongo==4.10.1 # Why PyMongo? PyMongo is the official MongoDB driver for synchr
 pydantic[email]
 passlib
 passlib[bcrypt]
+jwt
+python-dotenv
