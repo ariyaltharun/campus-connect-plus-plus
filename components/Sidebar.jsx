@@ -4,16 +4,17 @@ import { Link } from "react-router-dom";
 import { FaCalendarAlt } from "react-icons/fa";
 import { BsKanban } from "react-icons/bs";
 import { MdDashboard } from "react-icons/md";
-import { PiStudentFill } from "react-icons/pi";
+import { PiProjectorScreenChartBold, PiStudentFill } from "react-icons/pi";
 import { RiTeamLine } from "react-icons/ri";
+import { LuLogIn, LuLogOut } from "react-icons/lu";
 
-export default function Sidebar() {
+export default function Sidebar({ isOpen }) {
   return (
     <>
       {/* drawer component */}
       <div
         id="drawer-navigation"
-        className="bg-slate-600 dark:bg-gray-800 text-slate-100 fixed top-0 left-0 z-40 w-64 h-screen p-4 overflow-y-auto transition-transform -translate-x-full "
+        className={`pt-20 bg-slate-200 dark:bg-gray-800 text-slate-100 fixed top-0 left-0 z-40 w-64 h-screen p-4 overflow-y-auto transition-transform ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
         tabIndex="-1"
         aria-labelledby="drawer-navigation-label"
       >
@@ -23,33 +24,12 @@ export default function Sidebar() {
         >
           Menu
         </h5>
-        <button
-          type="button"
-          data-drawer-hide="drawer-navigation"
-          aria-controls="drawer-navigation"
-          className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 end-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-        >
-          <svg
-            aria-hidden="true"
-            className="w-5 h-5"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fillRule="evenodd"
-              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-              clipRule="evenodd"
-            ></path>
-          </svg>
-          <span className="sr-only">Close menu</span>
-        </button>
         <div className=" text-slate-100 py-4 overflow-y-auto">
           <ul className="space-y-2 font-medium">
             <li>
               <Link
                 to="/"
-                className="flex items-center p-2  rounded-lg text-white hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
+                className="flex items-center p-2  rounded-lg text-gray-500 dark:text-gray-200 hover:bg-gray-300 hover:text-gray-600 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
               >
                 <svg
                   className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -66,7 +46,7 @@ export default function Sidebar() {
             <li>
               <Link
                 to="/statistics"
-                className="flex items-center p-2  rounded-lg text-white hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
+                className="flex items-center p-2  rounded-lg text-gray-500 dark:text-gray-200 hover:bg-gray-300 hover:text-gray-600 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
               >
                 <svg
                   className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -86,7 +66,7 @@ export default function Sidebar() {
             <li>
               <Link
                 to="/find_projects"
-                className="flex items-center p-2  rounded-lg text-white hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
+                className="flex items-center p-2  rounded-lg text-gray-500 dark:text-gray-200 hover:bg-gray-300 hover:text-gray-600 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
               >
                 <svg
                   className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -105,7 +85,7 @@ export default function Sidebar() {
             <li>
               <Link
                 to="/find_people"
-                className="flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
+                className="flex items-center p-2 rounded-lg text-gray-500 dark:text-gray-200 hover:bg-gray-300 hover:text-gray-600 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
               >
                 <svg
                   className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -124,7 +104,7 @@ export default function Sidebar() {
             <li>
               <Link
                 to="/find_students"
-                className="flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
+                className="flex items-center p-2 rounded-lg text-gray-500 dark:text-gray-200 hover:bg-gray-300 hover:text-gray-600 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
               >
                 <PiStudentFill className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true"/>
                 <span className="flex-1 ms-3 whitespace-nowrap">
@@ -135,7 +115,7 @@ export default function Sidebar() {
             <li>
               <Link
                 to="/know_team_members"
-                className="flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
+                className="flex items-center p-2 rounded-lg text-gray-500 dark:text-gray-200 hover:bg-gray-300 hover:text-gray-600 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
               >
                 <RiTeamLine className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" />
                 <span className="flex-1 ms-3 whitespace-nowrap">
@@ -145,30 +125,8 @@ export default function Sidebar() {
             </li>
             <li>
               <Link
-                to="/calendar"
-                className="flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
-              >
-                <FaCalendarAlt className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true"/>
-                <span className="flex-1 ms-3 whitespace-nowrap">
-                  Calendar
-                </span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/kanban"
-                className="flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
-              >
-                <BsKanban className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" />
-                <span className="flex-1 ms-3 whitespace-nowrap">
-                  Kanban Board
-                </span>
-              </Link>
-            </li>
-            <li>
-              <Link
                 to="/dashboard"
-                className="flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
+                className="flex items-center p-2 rounded-lg text-gray-500 dark:text-gray-200 hover:bg-gray-300 hover:text-gray-600 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
               >
                 <MdDashboard className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" />
                 <span className="flex-1 ms-3 whitespace-nowrap">
@@ -176,11 +134,11 @@ export default function Sidebar() {
                 </span>
               </Link>
             </li>
-            <p>Student</p>
+            <p className="text-base font-semibold text-gray-500 uppercase dark:text-gray-400">Student</p>
             <li>
               <Link
                 to="/student_signup"
-                className="flex items-center p-2  rounded-lg text-white hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
+                className="flex items-center p-2  rounded-lg text-gray-500 dark:text-gray-200 hover:bg-gray-300 hover:text-gray-600 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
               >
                 <svg
                   className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -199,27 +157,27 @@ export default function Sidebar() {
             <li>
               <Link
                 to="/student_signin"
-                className="flex items-center p-2  rounded-lg text-white hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
+                className="flex items-center p-2  rounded-lg text-gray-500 dark:text-gray-200 hover:bg-gray-300 hover:text-gray-600 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
               >
-                <svg
-                  className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.96 2.96 0 0 0 .13 5H5Z" />
-                  <path d="M6.737 11.061a2.961 2.961 0 0 1 .81-1.515l6.117-6.116A4.839 4.839 0 0 1 16 2.141V2a1.97 1.97 0 0 0-1.933-2H7v5a2 2 0 0 1-2 2H0v11a1.969 1.969 0 0 0 1.933 2h12.134A1.97 1.97 0 0 0 16 18v-3.093l-1.546 1.546c-.413.413-.94.695-1.513.81l-3.4.679a2.947 2.947 0 0 1-1.85-.227 2.96 2.96 0 0 1-1.635-3.257l.681-3.397Z" />
-                  <path d="M8.961 16a.93.93 0 0 0 .189-.019l3.4-.679a.961.961 0 0 0 .49-.263l6.118-6.117a2.884 2.884 0 0 0-4.079-4.078l-6.117 6.117a.96.96 0 0 0-.263.491l-.679 3.4A.961.961 0 0 0 8.961 16Zm7.477-9.8a.958.958 0 0 1 .68-.281.961.961 0 0 1 .682 1.644l-.315.315-1.36-1.36.313-.318Zm-5.911 5.911 4.236-4.236 1.359 1.359-4.236 4.237-1.7.339.341-1.699Z" />
-                </svg>
+                <LuLogIn className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true"  />
                 <span className="flex-1 ms-3 whitespace-nowrap">Sign In</span>
               </Link>
             </li>
-            <p>Faculty</p>
+            {/* Signout option not yet done */}
+            <li>
+              <Link
+                to="#"
+                className="flex items-center p-2  rounded-lg text-gray-500 dark:text-gray-200 hover:bg-gray-300 hover:text-gray-600 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
+              >
+                <LuLogOut className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true"  />
+                <span className="flex-1 ms-3 whitespace-nowrap">Sign Out</span>
+              </Link>
+            </li>
+            <p className="text-base font-semibold text-gray-500 uppercase dark:text-gray-400">Faculty</p>
             <li>
               <Link
                 to="/faculty_signup"
-                className="flex items-center p-2  rounded-lg text-white hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
+                className="flex items-center p-2  rounded-lg text-gray-500 dark:text-gray-200 hover:bg-gray-300 hover:text-gray-600 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
               >
                 <svg
                   className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -238,39 +196,52 @@ export default function Sidebar() {
             <li>
               <Link
                 to="/faculty_signin"
-                className="flex items-center p-2  rounded-lg text-white hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
+                className="flex items-center p-2  rounded-lg text-gray-500 dark:text-gray-200 hover:bg-gray-300 hover:text-gray-600 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
               >
-                <svg
-                  className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.96 2.96 0 0 0 .13 5H5Z" />
-                  <path d="M6.737 11.061a2.961 2.961 0 0 1 .81-1.515l6.117-6.116A4.839 4.839 0 0 1 16 2.141V2a1.97 1.97 0 0 0-1.933-2H7v5a2 2 0 0 1-2 2H0v11a1.969 1.969 0 0 0 1.933 2h12.134A1.97 1.97 0 0 0 16 18v-3.093l-1.546 1.546c-.413.413-.94.695-1.513.81l-3.4.679a2.947 2.947 0 0 1-1.85-.227 2.96 2.96 0 0 1-1.635-3.257l.681-3.397Z" />
-                  <path d="M8.961 16a.93.93 0 0 0 .189-.019l3.4-.679a.961.961 0 0 0 .49-.263l6.118-6.117a2.884 2.884 0 0 0-4.079-4.078l-6.117 6.117a.96.96 0 0 0-.263.491l-.679 3.4A.961.961 0 0 0 8.961 16Zm7.477-9.8a.958.958 0 0 1 .68-.281.961.961 0 0 1 .682 1.644l-.315.315-1.36-1.36.313-.318Zm-5.911 5.911 4.236-4.236 1.359 1.359-4.236 4.237-1.7.339.341-1.699Z" />
-                </svg>
+                <LuLogIn className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true"  />
                 <span className="flex-1 ms-3 whitespace-nowrap">Sign In</span>
+              </Link>
+            </li>
+            {/* Signout option not yet done */}
+            <li>
+              <Link
+                to="#"
+                className="flex items-center p-2  rounded-lg text-gray-500 dark:text-gray-200 hover:bg-gray-300 hover:text-gray-600 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
+              >
+                <LuLogOut className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true"  />
+                <span className="flex-1 ms-3 whitespace-nowrap">Sign Out</span>
+              </Link>
+            </li>
+            <p className="text-base font-semibold text-gray-500 uppercase dark:text-gray-400">Project</p>
+            <li>
+              <Link
+                to="/project"
+                className="flex items-center p-2  rounded-lg text-gray-500 dark:text-gray-200 hover:bg-gray-300 hover:text-gray-600 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
+              >
+                <PiProjectorScreenChartBold className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" />
+                <span className="flex-1 ms-3 whitespace-nowrap">Project Dashboard</span>
               </Link>
             </li>
             <li>
               <Link
-                to="/project"
-                className="flex items-center p-2  rounded-lg text-white hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
+                to="/calendar"
+                className="flex items-center p-2 rounded-lg text-gray-500 dark:text-gray-200 hover:bg-gray-300 hover:text-gray-600 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
               >
-                <svg
-                  className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.96 2.96 0 0 0 .13 5H5Z" />
-                  <path d="M6.737 11.061a2.961 2.961 0 0 1 .81-1.515l6.117-6.116A4.839 4.839 0 0 1 16 2.141V2a1.97 1.97 0 0 0-1.933-2H7v5a2 2 0 0 1-2 2H0v11a1.969 1.969 0 0 0 1.933 2h12.134A1.97 1.97 0 0 0 16 18v-3.093l-1.546 1.546c-.413.413-.94.695-1.513.81l-3.4.679a2.947 2.947 0 0 1-1.85-.227 2.96 2.96 0 0 1-1.635-3.257l.681-3.397Z" />
-                  <path d="M8.961 16a.93.93 0 0 0 .189-.019l3.4-.679a.961.961 0 0 0 .49-.263l6.118-6.117a2.884 2.884 0 0 0-4.079-4.078l-6.117 6.117a.96.96 0 0 0-.263.491l-.679 3.4A.961.961 0 0 0 8.961 16Zm7.477-9.8a.958.958 0 0 1 .68-.281.961.961 0 0 1 .682 1.644l-.315.315-1.36-1.36.313-.318Zm-5.911 5.911 4.236-4.236 1.359 1.359-4.236 4.237-1.7.339.341-1.699Z" />
-                </svg>
-                <span className="flex-1 ms-3 whitespace-nowrap">Project</span>
+                <FaCalendarAlt className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true"/>
+                <span className="flex-1 ms-3 whitespace-nowrap">
+                  Calendar
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/kanban"
+                className="flex items-center p-2 rounded-lg text-gray-500 dark:text-gray-200 hover:bg-gray-300 hover:text-gray-600 dark:hover:bg-gray-700 dark:hover:text-gray-100 group"
+              >
+                <BsKanban className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" />
+                <span className="flex-1 ms-3 whitespace-nowrap">
+                  Kanban Board
+                </span>
               </Link>
             </li>
           </ul>
