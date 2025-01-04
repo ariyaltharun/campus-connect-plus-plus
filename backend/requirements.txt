@@ -8,3 +8,4 @@ passlib
 passlib[bcrypt]
 PyJWT
 python-dotenv
+
